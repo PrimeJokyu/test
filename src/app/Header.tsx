@@ -5,9 +5,9 @@ const Header: React.FC = () => {
   return (
     <header className="bg-black text-white py-4 fixed top-0 w-full">
       <div className="max-w-screen-xl mx-auto flex justify-between items-center px-6">
-        <div className="flex">
+        <div className="flex items-center space-x-2">
           <Icon icon="mdi:react" width="24" height="24" />
-          <h1 className="text-2xl font-semibold">React　学習ページ</h1>
+          <h1 className="text-2xl font-semibold">React 学習ページ</h1>
         </div>
         <nav>
           <ul className="flex space-x-6">

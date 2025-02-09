@@ -1,27 +1,45 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
+import Q1 from "./Q1";
+import { useSearchParams } from "next/navigation";
+import Q2 from "./Q2";
+import Q3 from "./Q3";
+import Q4 from "./Q4";
+import Q5 from "./Q5";
+import Q6 from "./Q6";
+import Q7 from "./Q7";
+import Q8 from "./Q8";
+import Q9 from "./Q9";
 
 export default function ToggleTextButton() {
-  const [text, setText] = useState("");
+  const searchParams = useSearchParams();
 
-  return (
-    <div>
-      <div className="border">
-        <h1>問1. useStateの使い方</h1>
-        <p>
-          初期値は何も表示されなくて、クリックされたら「ボタンが押されました」と表示されるようなボタンを作成して下さい
-        </p>
-      </div>
-      <div className="flex justify-start mt-2 space-x-2">
-        <button
-          onClick={() => setText("ボタンが押されました。")}
-          className="bg-green-200 text-black rounded-lg"
-        >
-          ボタン
-        </button>
-        <p>{text}</p>
-      </div>
-    </div>
-  );
+  // 例: "name" というクエリパラメータを取得
+  const questioNumber = searchParams.get("q") || "No name provided";
+
+  const getQuestion = () => {
+    switch (questioNumber) {
+      case "1":
+        return <Q1 />;
+      case "2":
+        return <Q2 />;
+      case "3":
+        return <Q3 />;
+      case "4":
+        return <Q4 />;
+      case "5":
+        return <Q5 />;
+      case "6":
+        return <Q6 />;
+      case "7":
+        return <Q7 />;
+      case "8":
+        return <Q8 />;
+      case "9":
+        return <Q9 />;
+    }
+  };
+
+  return <div>{getQuestion()}</div>;
 }

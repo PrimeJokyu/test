@@ -1,27 +1,22 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
+import Question from "../components/Question";
+import JumpNextOrPrev from "../components/JumpNextOrPrev";
 
-export default function ToggleTextButton() {
-  const [text, setText] = useState("");
-
+export default function Q1() {
+  const hogeHoge = "hogeHoge";
   return (
-    <div>
-      <div className="border">
-        <h1>問1. useStateの使い方</h1>
-        <p>
-          初期値は何も表示されなくて、クリックされたら「ボタンが押されました」と表示されるようなボタンを作成して下さい
-        </p>
-      </div>
+    <>
+      <JumpNextOrPrev />
+      <Question
+        n={1}
+        title="変数の初期値"
+        p="変数を宣言して、画面上に表示してください"
+      />
       <div className="flex justify-start mt-2 space-x-2">
-        <button
-          onClick={() => setText("ボタンが押されました。")}
-          className="bg-green-200 text-black rounded-lg"
-        >
-          ボタン
-        </button>
-        <p>{text}</p>
+        <p>{hogeHoge}</p>
       </div>
-    </div>
+    </>
   );
 }
