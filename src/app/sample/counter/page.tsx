@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 
 const CounterPage: React.FC = () => {
@@ -12,13 +12,10 @@ const CounterPage: React.FC = () => {
       <h1 className="text-4xl font-bold">Counter</h1>
       <p className="mt-4 text-2xl">Count: {count}</p>
       <div className="mt-6">
-        <button
-          onClick={increase}
-          className="bg-blue-500 text-white px-4 py-2 mr-4"
-        >
+        <button onClick={increase} className="bg-blue-500 px-4 py-2 mr-4">
           Increase
         </button>
-        <button onClick={decrease} className="bg-red-500 text-white px-4 py-2">
+        <button onClick={decrease} className="bg-red-500 px-4 py-2">
           Decrease
         </button>
       </div>
