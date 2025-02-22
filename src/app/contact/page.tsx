@@ -22,30 +22,29 @@ export default function Home() {
   const sendEmail = async (formData: FormValues) => {
     setLoading(true);
     setError("");
-    try {
-      const res = await fetch("api/send-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          sendTo: formData.email,
-        }),
-      });
 
-      const data = await res.json();
-      console.log(data);
-      console.log(res.status);
-      if (res.status === 200) {
-        notify("メールを送信しました。");
-      }
-    } catch (e) {
-      console.log(e);
-      if (e instanceof Error) setError(e.message);
-    } finally {
-      setLoading(false);
+    const res = await fetch("api/send-email", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: formData.name,
+        sendTo: formData.email,
+      }),
+    });
+
+    const data = await res.json();
+    const status = res.status;
+    if (status !== 200) {
+      setError(` ${data.message} code: ${status}`);
     }
+    console.log(data);
+    console.log(status);
+    if (res.status === 200) {
+      notify("メールを送信しました。");
+    }
+    setLoading(false);
   };
 
   const onSubmit = (formData: FormValues) => {
@@ -95,6 +94,9 @@ export default function Home() {
           )}
         </div>
 
+        {/* エラーがあれば表示 */}
+
+        <div className="text-red-500 font-bold h-10">{error ? error : ""}</div>
         {/* 送信ボタン */}
         <button
           type="submit"
