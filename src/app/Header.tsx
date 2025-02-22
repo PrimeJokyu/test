@@ -12,8 +12,12 @@ const Header: React.FC = () => {
         <nav>
           <ul className="flex space-x-6">
             <li>
-              <a className="hover:text-gray-400" href="#home">
-                Home
+              <a
+                className="hover:text-gray-400"
+                href="https://www.alt-prime.com/teachingReport"
+                target="blank"
+              >
+                学習記録
               </a>
             </li>
             <li>
@@ -22,7 +26,7 @@ const Header: React.FC = () => {
               </a>
             </li>
             <li>
-              <a className="hover:text-gray-400" href="#contact">
+              <a className="hover:text-gray-400" href="/contact">
                 Contact
               </a>
             </li>

@@ -4,28 +4,24 @@ import React, { useState } from "react";
 import JumpNextOrPrev from "../components/JumpNextOrPrev";
 import Question from "../components/Question";
 
-export default function Q9() {
+export default function Q8() {
   const [count, setCount] = useState(0);
 
   function handleAddCount() {
     setCount((prev) => prev + 1); // setCount(count + 1);
   }
-
   function handleRemoveCount() {
-    if (count <= 0) {
-      return;
-    }
     setCount((prev) => prev - 1); // setCount(count + 1);
   }
 
   return (
     <>
-      <JumpNextOrPrev isEnd />
+      <JumpNextOrPrev />
+
       <Question
-        n={9}
-        title="【応用】条件付きカウンターの作成"
-        p={`0以下にはならないカウンターを作成してみよう（Q8の回答を再利用して回答してOK。）\n
-        ただし、条件分岐は以下のように記載してください\n（条件式の部分には、関数を何もせずに実行する条件を入れます。例：count > 5）\nif(条件式){/n return // これ以降の処理では何もしない\n}`}
+        n={8}
+        title="カウンターの作成"
+        p="状態変数を作成して表示し、その変数を+1するボタンと-1するボタンを作成してください"
       />
 
       <p>カウント：{count}</p>

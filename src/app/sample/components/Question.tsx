@@ -14,12 +14,15 @@ export default function Question(props: {
           </strong>
         </h1>
         <p>
-          {props.p.split("<br/>").map((line, index) => (
-            <React.Fragment key={index}>
-              {line}
-              <br />
-            </React.Fragment>
-          ))}
+          {(props.p ?? "")
+            .replace(/\\n/g, "\n")
+            .split("\n")
+            .map((line, index) => (
+              <React.Fragment key={index}>
+                {line}
+                <br />
+              </React.Fragment>
+            ))}
         </p>
       </div>
     </>
