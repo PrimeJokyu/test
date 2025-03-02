@@ -1,3 +1,6 @@
 export default function Home() {
-  return <div className="h-full">aaa</div>;
+  const test = ["aaa","bbb"]
+  return <div className="h-full" >{test[1]}</div>;
 }
+
+ 
