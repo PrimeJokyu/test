@@ -1,4 +1,21 @@
 export default function Home() {
-  return <div className="h-full"><div className="rounded-full bg-red-400 w-10 h-10">　</div><div>
-    <p className="text-7xl text-blue-500">×</p></div></div>;
+  return (
+    <>
+      <div className="flex space-x-4 space-y-4">
+        <div className="w-[100px] h-[100px] bg-red-500 rounded-full"></div>
+        <div className="w-[100px] h-[100px] bg-red-500 rounded-full"></div>
+        <div className="w-[100px] h-[100px] bg-red-500 rounded-full"></div>
+      </div>
+      <div className="flex space-x-4 space-y-4">
+        <div className="w-[100px] h-[100px] bg-red-500 rounded-full"></div>
+        <div className="w-[100px] h-[100px] bg-red-500 rounded-full"></div>
+        <div className="w-[100px] h-[100px] bg-red-500 rounded-full"></div>
+      </div>
+      <div className="flex space-x-4 space-y-4">
+        <div className="w-[100px] h-[100px] bg-red-500 rounded-full"></div>
+        <div className="w-[100px] h-[100px] bg-red-500 rounded-full"></div>
+        <div className="w-[100px] h-[100px] bg-red-500 rounded-full"></div>
+      </div>
+    </>
+  );
 }
