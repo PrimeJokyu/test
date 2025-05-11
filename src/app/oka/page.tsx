@@ -1,17 +1,32 @@
+"use client";
+
+import { useState } from "react";
+
 export default function Home() {
+  const [clicked, setClicked] = useState(Array(9).fill(false));
+
+  const toggleCircle = (index: number) => {
+    const newClicked = [...clicked];
+    newClicked[index] = !newClicked[index];
+    setClicked(newClicked);
+  };
+
   return (
-    //TODO: 丸同士の間隔を均等に
-    <><div className="grid grid-cols-3 gap-4 p-4">
-    <div className="w-12 h-12 bg-red-500 rounded-full"></div>
-    <div className="w-12 h-12 bg-red-500 rounded-full"></div>
-    <div className="w-12 h-12 bg-red-500 rounded-full"></div>
-    <div className="w-12 h-12 bg-red-500 rounded-full"></div>
-    <div className="w-12 h-12 bg-red-500 rounded-full"></div>
-    <div className="w-12 h-12 bg-red-500 rounded-full"></div>
-    <div className="w-12 h-12 bg-red-500 rounded-full"></div>
-    <div className="w-12 h-12 bg-red-500 rounded-full"></div>
-    <div className="w-12 h-12 bg-red-500 rounded-full"></div>
-  </div>
-    </>
+    <div className="flex justify-center">
+      {/* flexでアイテムを3列に並べる */}
+      <div className="flex flex-wrap gap-4 p-4 max-w-[460px] border">
+        {clicked.map((isClicked, index) => (
+          <div className="border">
+            <div
+              key={index}
+              className="w-32 h-32 bg-red-500 rounded-full flex items-center justify-center text-white text-6xl cursor-pointer"
+              onClick={() => toggleCircle(index)}
+            >
+              {isClicked ? "×" : ""}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
