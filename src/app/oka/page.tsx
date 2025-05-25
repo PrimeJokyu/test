@@ -16,7 +16,7 @@ export default function Home() {
       {/* flexでアイテムを3列に並べる */}
       <div className="flex flex-wrap gap-4 p-4 max-w-[460px] border">
         {clicked.map((isClicked, index) => (
-          <div className="border">
+          <div key={index} className="border">
             <div
               key={index}
               className="w-32 h-32 bg-red-500 rounded-full flex items-center justify-center text-white text-6xl cursor-pointer"

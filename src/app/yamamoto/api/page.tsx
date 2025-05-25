@@ -6,19 +6,17 @@ interface A {
   name: string;
   type: string;
   Compatibility: string;
-  Compatibilitygud: string;
 }
 
 const Pokemon = () => {
   const [poke, setPoke] = useState<A>();
   const [pika, setPika] = useState<A>();
   const [pikat, setPikat] = useState<A>();
-  const [effect, setEffect] = useState<string>("none");
+  const [effect, setEffect] = useState<string>("相性");
   const pikatyuu = {
     name: "ピカチュウ",
     type: "electric",
     Compatibility: "good",
-    Compatibilitygud: "水",
   };
   const Compatibility = () => {
     setPika(pikatyuu);
@@ -32,8 +30,12 @@ const Pokemon = () => {
       <div>{poke?.type}</div>
       <button onClick={Compatibility}>相性</button>
       <div>{pika?.Compatibility}</div>
-      <button onClick={() => setEffect(effects.electric.water)}>{effect}</button>
-      <div>{pikat?.Compatibilitygud}</div>
+      <button onClick={() => setEffect(effects.electric.water)}>電気→水{effect}</button>
+      <div>
+      <button onClick={() => setEffect(effects.electric.ground)}>電気→岩{effect}</button>
+      </div>
+
+      <div id="box" style={{padding:"10px"}}>背景色が変わります</div>
     </div>
   );
 };

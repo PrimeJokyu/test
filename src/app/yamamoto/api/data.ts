@@ -1,9 +1,9 @@
 export const effects = {
   electric: {
-    water: "good",       // 電気 → 水：効果ばつぐん
-    electric: "bad",     // 電気 → 電気：効果いまひとつ
-    ground: "none",      // 電気 → 地面：無効
-    flying: "good",      // 電気 → ひこう：効果ばつぐん
+    water: "効果ばつぐん",       // 電気 → 水：効果ばつぐん
+    electric: "効果いまひとつ",     // 電気 → 電気：効果いまひとつ
+    ground: "無効",      // 電気 → 地面：無効
+    flying: "効果ばつぐん",      // 電気 → ひこう：効果ばつぐん
   },
   fire: {
     grass: "good",
