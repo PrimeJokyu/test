@@ -1,9 +1,17 @@
 "use client";
 
+import { statSync } from "fs";
 import { useState } from "react";
 
 export default function Home() {
-  const [clicked, setClicked] = useState(Array(9).fill(false));
+  const [clicked, setClicked] = useState(Array(9).fill(null));
+
+  const checkStatus = (status: boolean | null) => {
+    if (status === null) {
+      return "";
+    }
+    return status ? "×" : "";
+  };
 
   const toggleCircle = (index: number) => {
     const newClicked = [...clicked];
@@ -19,10 +27,12 @@ export default function Home() {
           <div key={index} className="border">
             <div
               key={index}
-              className="w-32 h-32 bg-red-500 rounded-full flex items-center justify-center text-white text-6xl cursor-pointer"
+              className={`w-32 h-32 ${
+                isClicked === false ? "bg-red-500" : "text-black text-[270px]"
+              } rounded-full flex items-center justify-center text-white cursor-pointer`}
               onClick={() => toggleCircle(index)}
             >
-              {isClicked ? "×" : ""}
+              {checkStatus(isClicked)}
             </div>
           </div>
         ))}
@@ -30,3 +40,7 @@ export default function Home() {
     </div>
   );
 }
+
+// 文字の〇×じゃなくて、図形の丸×にする
+// 何もないときは格子だけ表示する
+// タップされたら〇×を交互に表示する
