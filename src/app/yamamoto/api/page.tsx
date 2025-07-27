@@ -1,94 +1,123 @@
 "use client";
 import { useState } from "react";
 import { effects } from "./data";
-
-export type Effectiveness = "効果ばつぐん" | "効果いまひとつ" | "無効";
-
-export type Effects = typeof effects;
-
-// 攻撃側タイプの文字列リテラル型
-export type AttackType = keyof Effects;
-
-// 防御側タイプの文字列リテラル型（攻撃タイプごとに違うがここではユニオンで）
-export type DefenseType = keyof Effects[AttackType];
-
-// 効果の型（effectsの中の値）
-export type Effect = Effects[AttackType][DefenseType];
-
-// 例: 使い方
-const denkiEffect = effects["でんき"];
-console.log(denkiEffect["みず"]); // 効果ばつぐん
-
 interface A {
   name: string;
   type: string;
-  Compatibility: string;
 }
+
+const getEffectResult = (attackType: string, defenseType: string) => {
+  if (!attackType || !defenseType) {
+    return "攻撃タイプと防御タイプの両方を入力してください。";
+  }
+  if (!(attackType in effects)) {
+    return "攻撃タイプが無効です。";
+  }
+  const attack = effects[attackType as keyof typeof effects];
+  if (!(defenseType in attack)) {
+    return "防御タイプが無効です。";
+  }
+  return attack[defenseType as keyof typeof attack];
+};
+
 const Pokemon = () => {
   const [poke, setPoke] = useState<A>();
-  const [pika, setPika] = useState<A>();
-  const [effect, setEffect] = useState<string>("相性");
+  
+const [number, setNumber] = useState("");
+const [imageUrl, setImageUrl] = useState("");
+const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const value = e.target.value;
+  setNumber(value);
+  if (value && !isNaN(Number(value))) {
+    const url = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${value}.png`;
+    setImageUrl(url);
+  } else {
+    setImageUrl(""); // 無効な入力のとき画像を消す
+  }
+};
 
-   const [text, setText] = useState<Effectiveness>('');
+
+  const [attackType, setAttackType] = useState<string>("");
   const type = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setText(e.target.value);
+    setAttackType(e.target.value);
   };
-    const [test, setTest] = useState('');
+  const [defenseType, setDefenseType] = useState<string>("");
   const type2 = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTest(e.target.value);
+    setDefenseType(e.target.value);
   };
 
   const pikatyuu = {
     name: "ピカチュウ",
     type: "electric",
-    Compatibility: "good",
   };
-  const Compatibility = () => {
-    setPika(pikatyuu);
-  };
+  const z = "3";
   return (
     <div>
       <div
         id="box"
         className=" bg-yellow-300 hover:opacity-50 transition-opacity duration-300 w-[90px] h-[25px]"
-        style={{padding: "2px", margin: "0px",}}
+        style={{ padding: "2px", margin: "0px" }}
       >
         {pikatyuu.name}
       </div>
       <button onClick={() => setPoke(pikatyuu)}>タイプ</button>
       <div>{poke?.type}</div>
-      <button onClick={Compatibility}>相性</button>
-      <div>{pika?.Compatibility}</div>
-      <button onClick={() => setEffect(effects.でんき.みず)}>
-        電気→水{effect}
-      </button>
       <div>
-        <button onClick={() => setEffect(effects.でんき.じめん)}>
-          電気→地面{effect}
-        </button>
+        <img
+          src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
+          alt="Pikachu"
+          width={96}
+          height={96}
+        />
       </div>
-
-      {text === "水" && <p>{effects.でんき.みず}</p>}
-       <div>
+      {attackType === "水" && <p>{effects.でんき.みず}</p>}
+      <div>
+        <input
+          type="text"
+          value={attackType}
+          onChange={type}
+          placeholder="タイプを入力してください"
+          className="border p-2 border-red-500"
+        />
+      </div>
       <input
         type="text"
-        value={text}
-        onChange={type}
-        placeholder="タイプを入力してください"
-        className="border: p-2 double red;"
-      />
-      
-    </div >
-    <input
-        type="text"
-        value={test}
+        value={defenseType}
         onChange={type2}
         placeholder="タイプを入力してください"
-        className="border: p-2 double red;"
+        className="border p-2 border-red-500"
       />
-       結果: {effects[text]?.[test] ?? "情報が見つかりません"}
+      <div>結果: {getEffectResult(attackType, defenseType)}</div>
+      <button
+        onClick={() =>
+          console.log("https://pokeapi.co/api/v2/pokemon/pikachu/")
+        }
+      >
+        a
+      </button>
 
-      <button onClick={() => console.log("https://pokeapi.co/api/v2/pokemon/pikachu/")}>ボタン</button>
+      <div style={{ textAlign: "center", padding: "50px" }}>
+        <h1>ポケモン画像 自動表示</h1>
+        <input
+          type="number"
+          value={number}
+          onChange={handleChange}
+          placeholder="ポケモン番号を入力 (例: 25)"
+          style={{ padding: "8px", fontSize: "16px", width: "200px" }}
+        />
+
+        <br />
+        <br />
+
+        {imageUrl && (
+          <img
+            src={imageUrl}
+            alt={`ポケモン番号 ${number}`}
+            width={120}
+            height={120}
+          />
+        )}
+      </div>
     </div>
   );
 };
